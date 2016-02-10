@@ -21,9 +21,10 @@ public class SimpleMessageProducer {
 
         try {
             connection = factory.createConnection();
-            StringBuilder buffer = new StringBuilder();
+            StringBuilder buffer;
 
             for (int i = 0; i < numberOfMessages; ++i) {
+                buffer = new StringBuilder();
                 buffer.append("Hello NATS! '").append(i).append("' ").append(new Date());
                 connection.publish("foo", buffer.toString().getBytes());
                 LOG.info("Sent message number {}", i);
