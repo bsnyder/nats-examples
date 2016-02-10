@@ -20,6 +20,13 @@
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
 
+  <appender name="CONSOLE-TRACE" class="org.apache.log4j.ConsoleAppender">
+    <param name="Threshold" value="trace"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%-5p - %-30c{1} - %m%n" />
+    </layout>
+  </appender>
+
   <!-- Standard debug level logging to the console -->
   <appender name="CONSOLE-DEBUG" class="org.apache.log4j.ConsoleAppender">
     <param name="Threshold" value="debug"/>
@@ -64,16 +71,20 @@
   <logger name="org.bsnyder">
     <level value="debug"/>
   </logger>
-  
-  <!-- 
+
+  <logger name="io.nats">
+    <level value="trace"/>
+  </logger>
+
+  <!--
    Comment/uncomment the appender-refs below depending on what kind of
    logging is needed. E.g., uncomment both FILE-DEBUG and FILE-INFO and
    two log files will be created, one for debug log statements and one for
    info log statements. 
   -->
   <root>
-    <priority value="info"/>
-    <appender-ref ref="CONSOLE-DEBUG"/>
+    <priority value="trace"/>
+    <appender-ref ref="CONSOLE-TRACE"/>
   </root>
   
 </log4j:configuration>
