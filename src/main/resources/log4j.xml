@@ -73,7 +73,7 @@
   </logger>
 
   <logger name="io.nats">
-    <level value="trace"/>
+    <level value="info"/>
   </logger>
 
   <!--
