@@ -1,26 +1,33 @@
 package org.bsnyder.nats.async;
 
+import io.nats.client.AsyncSubscription;
 import io.nats.client.Connection;
 import io.nats.client.ConnectionFactory;
 import io.nats.client.Message;
 import io.nats.client.MessageHandler;
+import io.nats.client.Subscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class SimpleMessageListener implements MessageHandler {
+public class SimpleAsyncMessageReceiver implements MessageHandler {
 
-    private final static Logger LOG = LoggerFactory.getLogger(SimpleMessageListener.class);
+    private final static Logger LOG = LoggerFactory.getLogger(SimpleAsyncMessageReceiver.class);
 
-    public void receiveMessages() {
+    public void receiveMessages(int numberOfMessages, String queueName) {
         ConnectionFactory factory = new ConnectionFactory(ConnectionFactory.DEFAULT_URL);
-        Connection connection;
+        Connection connection = null;
+        Subscription subscription = null;
 
         try {
             connection = factory.createConnection();
-            connection.subscribeAsync("foo", this);
+            subscription = connection.subscribeAsync(queueName, this);
+
+            if (numberOfMessages > 0) {
+                ((AsyncSubscription) subscription).autoUnsubscribe(numberOfMessages);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

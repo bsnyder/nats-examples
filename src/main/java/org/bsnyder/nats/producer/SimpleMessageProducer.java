@@ -13,9 +13,7 @@ public class SimpleMessageProducer {
 
     private final static Logger LOG = LoggerFactory.getLogger(SimpleMessageProducer.class);
 
-    protected int numberOfMessages = 10;
-
-    public void sendMessages() {
+    public void sendMessages(int numberOfMessages, String queueName) {
         ConnectionFactory factory = new ConnectionFactory(ConnectionFactory.DEFAULT_URL);
         Connection connection;
 
@@ -26,7 +24,7 @@ public class SimpleMessageProducer {
             for (int i = 0; i < numberOfMessages; ++i) {
                 buffer = new StringBuilder();
                 buffer.append("Hello NATS! '").append(i).append("' ").append(new Date());
-                connection.publish("foo", buffer.toString().getBytes());
+                connection.publish(queueName, buffer.toString().getBytes());
                 LOG.info("Sent message number {}", i);
             }
 

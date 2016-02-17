@@ -63,6 +63,9 @@
             </executions>
             <configuration>
               <mainClass>org.bsnyder.nats.ConsumerApp</mainClass>
+              <arguments>
+                <argument>${consumerType}</argument>
+              </arguments>
             </configuration>
           </plugin>
         </plugins>

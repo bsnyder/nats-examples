@@ -5,6 +5,6 @@ import org.bsnyder.nats.producer.SimpleMessageProducer;
 public class ProducerApp {
 
     public static void main(String[] args) {
-        new SimpleMessageProducer().sendMessages();
+        new SimpleMessageProducer().sendMessages(10, "foo");
     }
 }
