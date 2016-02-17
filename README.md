@@ -9,7 +9,7 @@ window and the producer in a third terminal window. This way you can see NATS
 output while watching the output from both the consumer and the producer.
 
 ## Asynchronous Consumption
-With asynchronous message consumption, message producers have no knowledge of message consumers and vice versa. Producers can send messages to the message broker without any dependency on the consumer (i.e., the consumer need not be present when the messages are sent to the message broker). This first set of exmaples demonstrates asychronous message consumption. See the `SimpleAsyncMessageReceiver` for the details.
+With asynchronous message consumption, message producers have no knowledge of message consumers and vice versa. Producers can send messages to the message broker without any dependency on the consumer (i.e., the consumer need not be present when the messages are sent to the message broker). Furthermore, a message handler is registered with the message broker for a given subscription allowing the message broker to invoke the message handler for every message that is received to the subscription. This first set of examples demonstrates asychronous message consumption. See the `SimpleAsyncMessageReceiver` for the details.
 
 #### Terminal One 
 In terminal one, run NATS:
