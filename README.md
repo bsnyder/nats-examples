@@ -9,7 +9,7 @@ window and the producer in a third terminal window. This way you can see NATS
 output while watching the output from both the consumer and the producer.
 
 ## Asynchronous Consumption
-With asynchronous message consumption, message producers have no knowledge of message consumers and vice versa. Producers can send messages to the message broker without any dependency on the consumer (i.e., the consumer need not be present when the messages are sent to the message broker). Furthermore, a message handler is registered with the message broker for a given subscription allowing the message broker to invoke the message handler for every message that is received to the subscription. This first set of examples demonstrates asychronous message consumption. See the `SimpleAsyncMessageReceiver` for the details.
+With asynchronous message consumption, message producers have no knowledge of message consumers and vice versa. Producers can send messages to the message broker without any dependency on the consumer (i.e., the consumer need not be present when the messages are sent to the message broker). Furthermore, a message handler is registered with the message broker for a given subscription allowing the message broker to invoke the message handler for every message that is received to the subscription. This first set of examples demonstrates asychronous message consumption. See the `SimpleAsyncMessageConsumer` for the details.
 
 #### Terminal One 
 In terminal one, run NATS:
@@ -37,7 +37,7 @@ Downloaded: https://oss.sonatype.org/content/repositories/snapshots/io/nats/jnat
 [INFO]
 [INFO] --- exec-maven-plugin:1.4.0:java (default-cli) @ nats-examples ---
 DEBUG - ConsumerApp                    - Using the 'async' consumer type
-DEBUG - ConsumerApp                    - Starting up the SimpleAsyncMessageReceiver
+DEBUG - ConsumerApp                    - Starting up the SimpleAsyncMessageConsumer
 ```
 
 #### Terminal Three
@@ -85,22 +85,22 @@ Downloaded: https://oss.sonatype.org/content/repositories/snapshots/io/nats/jnat
 [INFO]
 [INFO] --- exec-maven-plugin:1.4.0:java (default-cli) @ nats-examples ---
 DEBUG - ConsumerApp                    - Using the 'async' consumer type
-DEBUG - ConsumerApp                    - Starting up the SimpleAsyncMessageReceiver
-INFO  - SimpleAsyncMessageReceiver     - Received message: Hello NATS! '0' Tue Feb 16 22:58:17 MST 2016
-INFO  - SimpleAsyncMessageReceiver     - Received message: Hello NATS! '1' Tue Feb 16 22:58:17 MST 2016
-INFO  - SimpleAsyncMessageReceiver     - Received message: Hello NATS! '2' Tue Feb 16 22:58:17 MST 2016
-INFO  - SimpleAsyncMessageReceiver     - Received message: Hello NATS! '3' Tue Feb 16 22:58:17 MST 2016
-INFO  - SimpleAsyncMessageReceiver     - Received message: Hello NATS! '4' Tue Feb 16 22:58:17 MST 2016
-INFO  - SimpleAsyncMessageReceiver     - Received message: Hello NATS! '5' Tue Feb 16 22:58:17 MST 2016
-INFO  - SimpleAsyncMessageReceiver     - Received message: Hello NATS! '6' Tue Feb 16 22:58:17 MST 2016
-INFO  - SimpleAsyncMessageReceiver     - Received message: Hello NATS! '7' Tue Feb 16 22:58:17 MST 2016
-INFO  - SimpleAsyncMessageReceiver     - Received message: Hello NATS! '8' Tue Feb 16 22:58:17 MST 2016
-INFO  - SimpleAsyncMessageReceiver     - Received message: Hello NATS! '9' Tue Feb 16 22:58:17 MST 2016
+DEBUG - ConsumerApp                    - Starting up the SimpleAsyncMessageConsumer
+INFO  - SimpleAsyncMessageConsumer     - Received message: Hello NATS! '0' Tue Feb 16 22:58:17 MST 2016
+INFO  - SimpleAsyncMessageConsumer     - Received message: Hello NATS! '1' Tue Feb 16 22:58:17 MST 2016
+INFO  - SimpleAsyncMessageConsumer     - Received message: Hello NATS! '2' Tue Feb 16 22:58:17 MST 2016
+INFO  - SimpleAsyncMessageConsumer     - Received message: Hello NATS! '3' Tue Feb 16 22:58:17 MST 2016
+INFO  - SimpleAsyncMessageConsumer     - Received message: Hello NATS! '4' Tue Feb 16 22:58:17 MST 2016
+INFO  - SimpleAsyncMessageConsumer     - Received message: Hello NATS! '5' Tue Feb 16 22:58:17 MST 2016
+INFO  - SimpleAsyncMessageConsumer     - Received message: Hello NATS! '6' Tue Feb 16 22:58:17 MST 2016
+INFO  - SimpleAsyncMessageConsumer     - Received message: Hello NATS! '7' Tue Feb 16 22:58:17 MST 2016
+INFO  - SimpleAsyncMessageConsumer     - Received message: Hello NATS! '8' Tue Feb 16 22:58:17 MST 2016
+INFO  - SimpleAsyncMessageConsumer     - Received message: Hello NATS! '9' Tue Feb 16 22:58:17 MST 2016
 ```
 
 
 ## Synchronous Consumption
-With synchronous message consumption, the message consumer polls the message broker to wait for a message to received either indefinitely (using the `nextMessage()` method with no timeout) or for a specified amount of time (using the the `nextMessage(int timeout)` method with a timeout). This second set of exmaples demonstrates sychronous message consumption. See the `SimpleSyncMessageReceiver` for the details.
+With synchronous message consumption, the message consumer polls the message broker to wait for a message to received either indefinitely (using the `nextMessage()` method with no timeout) or for a specified amount of time (using the the `nextMessage(int timeout)` method with a timeout). This second set of exmaples demonstrates sychronous message consumption. See the `SimpleSyncMessageConsumer` for the details.
 
 #### Terminal One 
 In terminal one, run NATS:
@@ -128,7 +128,7 @@ Downloaded: https://oss.sonatype.org/content/repositories/snapshots/io/nats/jnat
 [INFO]
 [INFO] --- exec-maven-plugin:1.4.0:java (default-cli) @ nats-examples ---
 DEBUG - ConsumerApp                    - Using the 'sync' consumer type
-DEBUG - ConsumerApp                    - Starting up the SimpleSyncMessageReceiver
+DEBUG - ConsumerApp                    - Starting up the SimpleSyncMessageConsumer
 ```
 
 
@@ -181,26 +181,26 @@ https://oss.sonatype.org/content/repositories/snapshots/io/nats/jnats/0.4.0-SNAP
 [INFO] --- exec-maven-plugin:1.4.0:java (default-cli) @ nats-examples ---
 DEBUG - ConsumerApp                    - Using the 'sync' consumer type
 DEBUG - ConsumerApp                    - Starting up the
-SimpleSyncMessageReceiver
-INFO  - SimpleSyncMessageReceiver      - Received message: Hello NATS! '0' Tue
+SimpleSyncMessageConsumer
+INFO  - SimpleSyncMessageConsumer      - Received message: Hello NATS! '0' Tue
 Feb 16 22:52:11 MST 2016
-INFO  - SimpleSyncMessageReceiver      - Received message: Hello NATS! '1' Tue
+INFO  - SimpleSyncMessageConsumer      - Received message: Hello NATS! '1' Tue
 Feb 16 22:52:11 MST 2016
-INFO  - SimpleSyncMessageReceiver      - Received message: Hello NATS! '2' Tue
+INFO  - SimpleSyncMessageConsumer      - Received message: Hello NATS! '2' Tue
 Feb 16 22:52:11 MST 2016
-INFO  - SimpleSyncMessageReceiver      - Received message: Hello NATS! '3' Tue
+INFO  - SimpleSyncMessageConsumer      - Received message: Hello NATS! '3' Tue
 Feb 16 22:52:11 MST 2016
-INFO  - SimpleSyncMessageReceiver      - Received message: Hello NATS! '4' Tue
+INFO  - SimpleSyncMessageConsumer      - Received message: Hello NATS! '4' Tue
 Feb 16 22:52:11 MST 2016
-INFO  - SimpleSyncMessageReceiver      - Received message: Hello NATS! '5' Tue
+INFO  - SimpleSyncMessageConsumer      - Received message: Hello NATS! '5' Tue
 Feb 16 22:52:11 MST 2016
-INFO  - SimpleSyncMessageReceiver      - Received message: Hello NATS! '6' Tue
+INFO  - SimpleSyncMessageConsumer      - Received message: Hello NATS! '6' Tue
 Feb 16 22:52:11 MST 2016
-INFO  - SimpleSyncMessageReceiver      - Received message: Hello NATS! '7' Tue
+INFO  - SimpleSyncMessageConsumer      - Received message: Hello NATS! '7' Tue
 Feb 16 22:52:11 MST 2016
-INFO  - SimpleSyncMessageReceiver      - Received message: Hello NATS! '8' Tue
+INFO  - SimpleSyncMessageConsumer      - Received message: Hello NATS! '8' Tue
 Feb 16 22:52:11 MST 2016
-INFO  - SimpleSyncMessageReceiver      - Received message: Hello NATS! '9' Tue
+INFO  - SimpleSyncMessageConsumer      - Received message: Hello NATS! '9' Tue
 Feb 16 22:52:11 MST 2016
 ```
 

@@ -1,7 +1,7 @@
 package org.bsnyder.nats;
 
-import org.bsnyder.nats.async.SimpleAsyncMessageReceiver;
-import org.bsnyder.nats.sync.SimpleSyncMessageReceiver;
+import org.bsnyder.nats.async.SimpleAsyncMessageConsumer;
+import org.bsnyder.nats.sync.SimpleSyncMessageConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,11 +22,11 @@ public class ConsumerApp {
         LOG.debug("Using the '{}' consumer type", consumerType);
 
         if ("async".equals(consumerType)) {
-            LOG.debug("Starting up the SimpleAsyncMessageReceiver");
-            new SimpleAsyncMessageReceiver().receiveMessages(numberOfMessages, queueName);
+            LOG.debug("Starting up the SimpleAsyncMessageConsumer");
+            new SimpleAsyncMessageConsumer().receiveMessages(numberOfMessages, queueName);
         } else if ("sync".equals(consumerType)) {
-            LOG.debug("Starting up the SimpleSyncMessageReceiver");
-            new SimpleSyncMessageReceiver().receiveMessages(numberOfMessages, queueName);
+            LOG.debug("Starting up the SimpleSyncMessageConsumer");
+            new SimpleSyncMessageConsumer().receiveMessages(numberOfMessages, queueName);
         }
     }
 }

@@ -1,19 +1,20 @@
-package org.bsnyder.nats.sync;
+package org.bsnyder.nats.async;
 
+import io.nats.client.AsyncSubscription;
 import io.nats.client.Connection;
 import io.nats.client.ConnectionFactory;
 import io.nats.client.Message;
+import io.nats.client.MessageHandler;
 import io.nats.client.Subscription;
-import io.nats.client.SyncSubscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class SimpleSyncMessageReceiver {
+public class SimpleAsyncMessageConsumer implements MessageHandler {
 
-    private final static Logger LOG = LoggerFactory.getLogger(SimpleSyncMessageReceiver.class);
+    private final static Logger LOG = LoggerFactory.getLogger(SimpleAsyncMessageConsumer.class);
 
     public void receiveMessages(int numberOfMessages, String queueName) {
         ConnectionFactory factory = new ConnectionFactory(ConnectionFactory.DEFAULT_URL);
@@ -22,20 +23,21 @@ public class SimpleSyncMessageReceiver {
 
         try {
             connection = factory.createConnection();
-            subscription = connection.subscribeSync(queueName);
+            subscription = connection.subscribeAsync(queueName, this);
 
-            for (int i = 0; i < numberOfMessages; ++i) {
-                Message message = ((SyncSubscription) subscription).nextMessage();
-                LOG.info("Received message: {}", new String(message.getData()));
+            if (numberOfMessages > 0) {
+                ((AsyncSubscription) subscription).autoUnsubscribe(numberOfMessages);
             }
-
-            ((SyncSubscription)subscription).unsubscribe();
 
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TimeoutException e) {
             e.printStackTrace();
         }
+    }
+
+    public void onMessage(Message msg) {
+        LOG.info("Received message: {}", new String(msg.getData()));
     }
 
 }
